@@ -206,7 +206,7 @@ define :mongodb_instance, :mongodb_type => "mongod" , :action => [:enable, :star
           MongoDB.configure_sharded_collections(node, node['mongodb']['sharded_collections'])
         end
       end
-      action :nothing
+      action node.roles.include?('reconfigure_sharding') ? :create : :nothing
     end
   end
 end
