@@ -200,6 +200,7 @@ define :mongodb_instance, :mongodb_type => "mongod" , :action => [:enable, :star
     ruby_block "config_sharding" do
       block do
         if type == "mongos"
+          sleep 2
           MongoDB.configure_shards(node, shard_nodes)
           MongoDB.configure_sharded_collections(node, node['mongodb']['sharded_collections'])
         end
